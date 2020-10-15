@@ -1,0 +1,33 @@
+name: Ruby
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+    - name: Setup Ruby
+      uses: ruby/setup-ruby@v1
+    - name: Cache Dependencies
+      uses: actions/cache@v2.1.2
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: ${{ runner.os }}-gems-
+    - name: Setup Bundler Folder
+      run: bundle config path vendor/bundle
+    - name: Install Dependencies
+      run: bundle install --jobs 4 --retry 3
+    - name: Run Rubocop
+      run: bundle exec rubocop
+    - name: Run Tests
+      run: bundle exec rspec
+
