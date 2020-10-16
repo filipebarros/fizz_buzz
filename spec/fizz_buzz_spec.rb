@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require 'fizzbuzz'
+require 'fizz_buzz'
 
 RSpec.describe FizzBuzz do
   describe '.for' do
-    subject(fizzbuzzer) { described_class.for(number) }
+    subject(:fizzbuzzer) { described_class.for(number) }
 
     describe 'when number is multiple of 3' do
       let(:number) { 6 }
