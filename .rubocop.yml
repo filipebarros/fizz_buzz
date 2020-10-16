@@ -1,0 +1,14 @@
+require:
+  - rubocop/cop/internal_affairs
+  - rubocop-performance
+  - rubocop-rspec
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - 'vendor/**/*'
+  TargetRubyVersion: 2.7
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*.rb'
