@@ -6,9 +6,9 @@ require:
 AllCops:
   NewCops: enable
   Exclude:
-    - 'vendor/**/*'
-  TargetRubyVersion: 2.7
+    - "vendor/**/*"
+  TargetRubyVersion: 3.0
 
 Metrics/BlockLength:
   Exclude:
-    - 'spec/**/*.rb'
+    - "spec/**/*.rb"
