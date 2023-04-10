@@ -2,13 +2,14 @@ require:
   - rubocop/cop/internal_affairs
   - rubocop-performance
   - rubocop-rspec
-
+  - standard
+inherit_gem:
+  standard: config/base.yml
 AllCops:
   NewCops: enable
   Exclude:
     - "vendor/**/*"
   TargetRubyVersion: 3.0
-
 Metrics/BlockLength:
   Exclude:
     - "spec/**/*.rb"

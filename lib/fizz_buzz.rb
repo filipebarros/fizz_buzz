@@ -23,11 +23,11 @@ class FizzBuzz
 
   def calculate
     if (number % 15).zero?
-      'FizzBuzz'
+      "FizzBuzz"
     elsif (number % 5).zero?
-      'Buzz'
+      "Buzz"
     elsif (number % 3).zero?
-      'Fizz'
+      "Fizz"
     else
       number.to_s
     end
