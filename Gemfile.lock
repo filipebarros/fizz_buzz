@@ -59,7 +59,7 @@ DEPENDENCIES
   rubocop
   rubocop-performance
   rubocop-rspec
-  standard (>= 1.0)
+  standard
 
 BUNDLED WITH
    2.3.22

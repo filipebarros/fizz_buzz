@@ -7,5 +7,5 @@ group :development, :test do
   gem "rubocop"
   gem "rubocop-performance"
   gem "rubocop-rspec"
-  gem "standard", ">= 1.0"
+  gem "standard"
 end
