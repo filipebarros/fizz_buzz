@@ -53,10 +53,9 @@ PLATFORMS
 
 DEPENDENCIES
   rspec
-  rubocop
   rubocop-performance
   rubocop-rspec
-  standard
+  standard (>= 1.0)
 
 BUNDLED WITH
    2.3.22

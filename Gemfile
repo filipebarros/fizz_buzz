@@ -6,5 +6,5 @@ group :development, :test do
   gem "rspec"
   gem "rubocop-performance"
   gem "rubocop-rspec"
-  gem "standard"
+  gem "standard", ">= 1.0"
 end
