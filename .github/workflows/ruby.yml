@@ -1,52 +1,46 @@
 name: Lint and Test
-
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
-
+    branches: [main]
 jobs:
   lint:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v2
-    - name: Setup Ruby
-      uses: ruby/setup-ruby@v1
-    - name: Cache Dependencies
-      uses: actions/cache@v2
-      with:
-        path: vendor/bundle
-        key: fizzbuzz-v1-${{ runner.os }}-${{ hashFiles('**/Gemfile.lock') }}
-        restore-keys: fizzbuzz-v1-${{ runner.os }}-
-    - name: Setup Bundler Path
-      run: bundle config path vendor/bundle
-    - name: Install Dependencies
-      run: bundle install --jobs 4 --retry 3
-    - name: Run Rubocop
-      run: bundle exec standardrb --parallel
-
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+      - name: Cache Dependencies
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: fizzbuzz-v1-${{ runner.os }}-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: fizzbuzz-v1-${{ runner.os }}-
+      - name: Setup Bundler Path
+        run: bundle config path vendor/bundle
+      - name: Install Dependencies
+        run: bundle install --jobs 4 --retry 3
+      - name: Run Rubocop
+        run: bundle exec standardrb --parallel
   test:
     runs-on: ubuntu-latest
-
     needs: lint
-
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v2
-    - name: Setup Ruby
-      uses: ruby/setup-ruby@v1
-    - name: Cache Dependencies
-      uses: actions/cache@v2
-      with:
-        path: vendor/bundle
-        key: fizzbuzz-v1-${{ runner.os }}-${{ hashFiles('**/Gemfile.lock') }}
-        restore-keys: fizzbuzz-v1-${{ runner.os }}-
-    - name: Setup Bundler Path
-      run: bundle config path vendor/bundle
-    - name: Install Dependencies
-      run: bundle install --jobs 4 --retry 3
-    - name: Run Tests
-      run: bundle exec rspec
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+      - name: Cache Dependencies
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: fizzbuzz-v1-${{ runner.os }}-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: fizzbuzz-v1-${{ runner.os }}-
+      - name: Setup Bundler Path
+        run: bundle config path vendor/bundle
+      - name: Install Dependencies
+        run: bundle install --jobs 4 --retry 3
+      - name: Run Tests
+        run: bundle exec rspec
