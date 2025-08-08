@@ -1,5 +1,7 @@
 require:
   - standard
+
+plugins:
   - rubocop-performance
   - rubocop-rspec
 
@@ -10,7 +12,7 @@ AllCops:
   NewCops: enable
   Exclude:
     - "vendor/**/*"
-  TargetRubyVersion: 3.0
+  TargetRubyVersion: 3.4
 
 Metrics/BlockLength:
   Exclude:
@@ -20,3 +22,10 @@ RSpec:
   Enabled: true # enable rubocop-rspec cops
 RSpec/DescribeClass:
   Enabled: false # ignore missing comments on classes
+
+# Prefer single quotes for string literals unless interpolation or special symbols are required.
+Style/StringLiterals:
+  EnforcedStyle: single_quotes
+
+Style/StringLiteralsInInterpolation:
+  EnforcedStyle: single_quotes

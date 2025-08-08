@@ -67,6 +67,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-23
+  arm64-darwin-24
   x86_64-linux
 
 DEPENDENCIES
@@ -76,4 +77,4 @@ DEPENDENCIES
   standard (>= 1.0)
 
 BUNDLED WITH
-   2.4.18
+   2.7.1
