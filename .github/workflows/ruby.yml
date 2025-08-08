@@ -6,42 +6,33 @@ on:
   pull_request:
     branches: [main]
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
-      - name: Cache Dependencies
-        uses: actions/cache@v4
-        with:
-          path: vendor/bundle
-          key: fizzbuzz-v1-${{ runner.os }}-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: fizzbuzz-v1-${{ runner.os }}-
-      - name: Setup Bundler Path
-        run: bundle config path vendor/bundle
-      - name: Install Dependencies
-        run: bundle install --jobs 4 --retry 3
-      - name: Run Rubocop
-        run: bundle exec standardrb --parallel
   test:
-    runs-on: ubuntu-latest
-    needs: lint
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        ruby: ['3.2', '3.3', '3.4']
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
-      - name: Cache Dependencies
-        uses: actions/cache@v4
         with:
-          path: vendor/bundle
-          key: fizzbuzz-v1-${{ runner.os }}-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: fizzbuzz-v1-${{ runner.os }}-
-      - name: Setup Bundler Path
-        run: bundle config path vendor/bundle
-      - name: Install Dependencies
-        run: bundle install --jobs 4 --retry 3
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
       - name: Run Tests
         run: bundle exec rspec
+  lint:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.4'
+          bundler-cache: true
+      - name: Run RuboCop
+        run: bundle exec rubocop
